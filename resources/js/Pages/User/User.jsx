@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout_Admin';
 
 export default function Users({ auth, users }) {
     return (
@@ -11,8 +11,10 @@ export default function Users({ auth, users }) {
                         <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
                             Users
                         </h2>
-                        <Link href="/Pengaduan/create" className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
-                            Tambah Users
+                        <Link
+                        href={route("user.create")}
+                        className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                            Add New
                         </Link>
                     </div>
                     <div className="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
