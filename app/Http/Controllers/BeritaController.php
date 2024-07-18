@@ -17,10 +17,12 @@ class BeritaController extends Controller
     {
         // Mengambil data berita dari database
         $berita = BeritaModel::all();
+        $carousel = BeritaModel::orderBy('id', 'desc')->limit(3)->get();
 
         // Merender komponen React Berita.jsx dengan menggunakan Inertia
         return Inertia::render('Berita/Berita', [
             'berita' => $berita,
+            'carousel' => $carousel
         ]);
     }
     /**
@@ -28,7 +30,7 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Berita/Create');
     }
 
     /**
@@ -36,15 +38,33 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imagePath = $request->file('image')->store('images', 'public');
+
+        $berita = new BeritaModel();
+        $berita->judul = $request->judul;
+        $berita->isi = $request->isi;
+        $berita->image = $imagePath;
+        $berita->tanggal = date('Y-m-d');
+        $berita->save();
+
+        return redirect()->route('berita.index')->with('success', 'Berita created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BeritaModel $beritum)
     {
-        //
+
+        return Inertia::render('Berita/Detail', [
+            'berita' => $beritum
+        ]);
     }
 
     /**
