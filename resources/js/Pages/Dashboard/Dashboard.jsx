@@ -1,5 +1,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import 'chart.js/auto';
+import { defaults, Legend } from 'chart.js/auto';
+import { Bar, Doughnut, Line } from 'react-chartjs-2';
+
+defaults.maintainAspectRatio = false;
+defaults.responsive = true;
+defaults.plugins.legend.display = false;
 
 export default function Dashboard({ auth }) {
     return (
@@ -69,7 +76,36 @@ export default function Dashboard({ auth }) {
                             <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                                 <center>Total Warga</center>
                             </h4>
-                            <canvas id="pie"></canvas>
+                            {/* <canvas id="pie"></canvas> */}
+                            <div className="dataCard testingCard flex justify-center">
+                                <Doughnut
+                                    data={{
+                                        datasets: [
+                                            {
+                                                data: [33, 33, 33],
+                                                /**
+                                                 * These colors come from Tailwind CSS palette
+                                                 * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
+                                                 */
+                                                backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
+                                                cutout: "80%",
+                                                responsive: true,
+                                                label: 'Dataset 1',
+                                            },
+                                        ],
+                                        options: {
+                                            /**
+                                             * Default legends are ugly and impossible to style.
+                                             * See examples in charts.html to add your own legends
+                                             *  */
+                                            Legend: {
+                                                display: false
+                                            }
+                                        },
+                                        labels: ['Warga', 'Anggota', 'RT'],
+                                    }}
+                                />
+                            </div>
                             <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
                                 <div className="flex items-center">
                                     <span className="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
@@ -89,15 +125,59 @@ export default function Dashboard({ auth }) {
                             <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                                 <center>Total Pengaduan </center>
                             </h4>
-                            <canvas id="line"></canvas>
+                            {/* <canvas id="line"></canvas> */}
+                            <div className="dataCard testingCard flex justify-center">
+                                <Line
+                                    data={{
+                                        datasets: [
+                                            {
+                                                label: 'Selesai',
+                                                /**
+                                                 * These colors come from Tailwind CSS palette
+                                                 * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
+                                                 */
+                                                backgroundColor: '#0694a2',
+                                                borderColor: '#0694a2',
+                                                data: [43, 48, 40, 54, 67, 73, 70],
+                                                fill: false,
+                                            },
+                                            {
+                                                label: 'Proses',
+                                                fill: false,
+                                                /**
+                                                 * These colors come from Tailwind CSS palette
+                                                 * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
+                                                 */
+                                                backgroundColor: '#7e3af2',
+                                                borderColor: '#7e3af2',
+                                                data: [24, 50, 64, 74, 52, 51, 65],
+                                            },
+                                        ],
+                                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                    }}
+                                    options={{
+                                        plugins: {
+                                            tooltip:{
+                                                mode:"index",
+                                                intersect: false
+                                            }   
+                                        },
+                                        elements:{
+                                            line:{
+                                                tension: 0.5
+                                            }
+                                        }
+                                    }}
+                                />
+                            </div>
                             <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
                                 <div className="flex items-center">
                                     <span className="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                    <span>Organic</span>
+                                    <span>Selesai</span>
                                 </div>
                                 <div className="flex items-center">
                                     <span className="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                    <span>Paid</span>
+                                    <span>Proses</span>
                                 </div>
                             </div>
                         </div>
