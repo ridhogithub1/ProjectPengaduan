@@ -1,5 +1,6 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
+import SelectInput from "@/Components/SelectInput";
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
@@ -15,8 +16,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         jenis_kelamin: user.jenis_kelamin,
         tanggal_lahir: user.tanggal_lahir,
         kontak: user.kontak,
-        role: user.role,
-        status: user.status,
+
     });
 
     const submit = (e) => {
@@ -62,45 +62,71 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
-                        autoComplete="username"
+                        autoComplete="email"
                     />
 
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="alamat" value="Alamat" />
+                    <InputLabel htmlFor="user_alamat" value="Alamat" />
 
                     <TextInput
-                        id="alamat"
+                        id="user_alamat"
                         className="mt-1 block w-full"
                         value={data.alamat}
                         onChange={(e) => setData('alamat', e.target.value)}
                         required
+                        isFocused
+                        autoComplete="alamat"
+                        
                     />
 
                     <InputError className="mt-2" message={errors.alamat} />
                 </div>
 
-                <div>
-                    <InputLabel htmlFor="jenis_kelamin" value="Jenis Kelamin" />
-
-                    <TextInput
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="user_jenis_kelamin"
+                        value="Jenis Kelamin"
+                    />
+                    <SelectInput
+                        name="user_jenis_kelamin"
                         id="jenis_kelamin"
                         className="mt-1 block w-full"
-                        value={data.jenis_kelamin}
-                        onChange={(e) => setData('jenis_kelamin', e.target.value)}
-                        required
-                    />
+                        onChange={(e) => setData("jenis_kelamin", e.target.value)}
+                    >
+                        <option value="">Pilih Jenis Kelamin</option>
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
 
-                    <InputError className="mt-2" message={errors.jenis_kelamin} />
+                        <InputError message={errors.project_jenis_kelamin} className="mt-2" />
+                    </SelectInput>
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="tanggal_lahir" value="Tanggal Lahir" />
+                    <InputLabel htmlFor="user_kontak" value="Kontak" />
 
                     <TextInput
-                        id="tanggal_lahir"
+                        id="user_kontak"
+                        type="number"
+                        className="mt-1 block w-full"
+                        value={data.kontak}
+                        onChange={(e) => setData('kontak', e.target.value)}
+                        required
+                        isFocused
+                        autoComplete="kontak"
+                        
+                    />
+
+                    <InputError className="mt-2" message={errors.kontak} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="user_tanggal_lahir" value="tanggal_lahir" />
+
+                    <TextInput
+                        id="user_tanggal_lahir"
                         type="date"
                         className="mt-1 block w-full"
                         value={data.tanggal_lahir}
@@ -109,48 +135,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     />
 
                     <InputError className="mt-2" message={errors.tanggal_lahir} />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="kontak" value="Kontak" />
-
-                    <TextInput
-                        id="kontak"
-                        className="mt-1 block w-full"
-                        value={data.kontak}
-                        onChange={(e) => setData('kontak', e.target.value)}
-                        required
-                    />
-
-                    <InputError className="mt-2" message={errors.kontak} />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="role" value="Role" />
-
-                    <TextInput
-                        id="role"
-                        className="mt-1 block w-full"
-                        value={data.role}
-                        onChange={(e) => setData('role', e.target.value)}
-                        required
-                    />
-
-                    <InputError className="mt-2" message={errors.role} />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="status" value="Status" />
-
-                    <TextInput
-                        id="status"
-                        className="mt-1 block w-full"
-                        value={data.status}
-                        onChange={(e) => setData('status', e.target.value)}
-                        required
-                    />
-
-                    <InputError className="mt-2" message={errors.status} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
