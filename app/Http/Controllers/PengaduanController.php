@@ -14,14 +14,42 @@ class PengaduanController extends Controller
     {
         $pengaduan = PengaduanModel::orderBy('created_at', 'desc')->paginate(10);
 
-        return Inertia::render('Pengaduan/Pengaduan', [
-            'pengaduan' => $pengaduan,
-        ]);
+        if(auth()->user()->role=="Admin"){
+            return Inertia::render('Pengaduan/Pengaduan', [
+                'pengaduan' => $pengaduan,
+            ]);
+        }
+        else if(auth()->user()->role=="Warga"){
+            return Inertia::render('Pengaduan/Pengaduan_Warga', [
+                'pengaduan' => $pengaduan,
+            ]);
+        }
+        else if(auth()->user()->role=="RT"){
+            return Inertia::render('Pengaduan/Pengaduan_RT', [
+                'pengaduan' => $pengaduan,
+            ]);
+        }
+        else if(auth()->user()->role=="Anggota"){
+            return Inertia::render('Pengaduan/Pengaduan_Anggota', [
+                'pengaduan' => $pengaduan,
+            ]);
+        }
     }
 
     public function create()
     {
-        return Inertia::render('Pengaduan/TambahPengaduan');
+         if(auth()->user()->role=="Admin"){
+            return Inertia::render('Pengaduan/TambahPengaduan');
+        }
+        else if(auth()->user()->role=="Warga"){
+            return Inertia::render('Pengaduan/TambahPengaduan_Warga');
+        }
+        else if(auth()->user()->role=="RT"){
+            return Inertia::render('Pengaduan/TambahPengaduan_RT');
+        }
+        else if(auth()->user()->role=="Anggota"){
+            return Inertia::render('Pengaduan/TambahPengaduan_Anggota');
+        }
     }
 
     public function store(Request $request)
