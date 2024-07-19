@@ -18,7 +18,7 @@ export default function AuthenticatedLayout({ user, header, children }) {
                   
                     <ul className="mt-6">
                     
-                        <NavLink href="/dashboard" active={url.startsWith('/dashboard')}>
+                        <NavLink href="/dashboard_Warga" active={url.startsWith('/dashboard')}>
                             <span className="ml-4">Dashboard</span>
                         </NavLink>
                         <NavLink href="/pengaduan" active={url.startsWith('/pengaduan')}>
@@ -27,12 +27,10 @@ export default function AuthenticatedLayout({ user, header, children }) {
                         <NavLink href="/diskusi" active={url.startsWith('/diskusi')}>
                             <span className="ml-4">Diskusi</span>
                         </NavLink>
-                        {/* <NavLink href="/berita" active={url.startsWith('/berita')}>
+                        <NavLink href="/berita" active={url.startsWith('/berita')}>
                             <span className="ml-4">Berita</span>
                         </NavLink>
-                        <NavLink href="/user" active={url.startsWith('/user')}>
-                            <span className="ml-4">User</span>
-                        </NavLink> */}
+                        
                     </ul>
                 </div>
             </aside>
