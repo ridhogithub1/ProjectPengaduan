@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout_Admin';
 import { Head } from '@inertiajs/react';
 import 'chart.js/auto';
 import { defaults, Legend } from 'chart.js/auto';
