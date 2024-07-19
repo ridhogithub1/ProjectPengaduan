@@ -16,8 +16,11 @@ use Inertia\Inertia;
 Route::redirect('/', '/dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', fn () => Inertia::render('Dashboard/Dashboard'))->name('dashboard');
-
+    Route::get('/dashboard_admin', fn() => Inertia::render('Dashboard/Dashboard'))->name('dashboard');
+    Route::get('/dashboard_warga', fn() => Inertia::render('Dashboard/Dashboard_Warga'))->name('dashboard_warga');
+    Route::get('/dashboard_rt', fn() => Inertia::render('Dashboard/Dashboard_RT'))->name('dashboard_rt');
+    Route::get('/dashboard_anggota', fn() => Inertia::render('Dashboard/Dashboard_Anggota'))->name('dashboard_anggota');
+    
     Route::resource('pengaduan', PengaduanController::class);
     Route::resource('diskusi', DiskusiController::class);
     Route::resource('user', UserController::class);
