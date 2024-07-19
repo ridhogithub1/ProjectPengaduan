@@ -20,10 +20,37 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit', [
+        if(auth()->user()->role=="Admin"){
+            return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
+        }
+
+        else if(auth()->user()->role=="Warga"){
+            return Inertia::render('Profile/Edit_Warga', [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
+        ]);
+        }
+
+        else if(auth()->user()->role=="RT"){
+            return Inertia::render('Profile/Edit_RT', [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
+        ]);
+        }
+
+        else if(auth()->user()->role=="Anggota"){
+            return Inertia::render('Profile/Edit_Anggota', [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
+        ]);
+        }
+        // return Inertia::render('Profile/Edit', [
+        //     'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+        //     'status' => session('status'),
+        // ]);
     }
 
     /**
@@ -60,6 +87,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/login');
     }
 }
