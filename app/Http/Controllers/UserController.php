@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 class UserController extends Controller
 {
     /**
@@ -13,14 +14,14 @@ class UserController extends Controller
      */
     // public function index()
     // {
-    //     $user = UserModel::all();
+    //     $user = User::all();
     //     return Inertia::render('User/User', [
     //         'user' => $user,
     //     ]);
     // }
     public function index()
     {
-        $users = UserModel::all();
+        $users = User::all();
         return Inertia::render('User/User', [
             'users' => $users,
         ]);
@@ -31,45 +32,74 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('User/Create');
+        return Inertia::render('User/TambahUser');
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'alamat' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'kontak' => 'required|string|max:255',
             'role' => 'required|string|max:255',
             'status' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        UserModel::create([
+        $user = User::create([
             'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
             'alamat' => $request->alamat,
-            'jenis_kelamin' => $request->jenis_kelamin,
+            'role' => $request->role,
             'tanggal_lahir' => $request->tanggal_lahir,
             'kontak' => $request->kontak,
-            'role' => $request->role,
             'status' => $request->status,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
         return redirect()->route('user.index')->with('success', 'User created successfully.');
     }
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'alamat' => 'required|string|max:255',
+    //         'jenis_kelamin' => 'required|string|max:255',
+    //         'tanggal_lahir' => 'required|date',
+    //         'kontak' => 'required|string|max:255',
+    //         'role' => 'required|string|max:255',
+    //         'status' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users',
+    //         'password' => 'required|string|min:8|confirmed',
+    //     ]);
+
+    //     User::create([
+    //         'name' => $request->name,
+    //         'alamat' => $request->alamat,
+    //         'jenis_kelamin' => $request->jenis_kelamin,
+    //         'tanggal_lahir' => $request->tanggal_lahir,
+    //         'kontak' => $request->kontak,
+    //         'role' => $request->role,
+    //         'status' => $request->status,
+    //         'email' => $request->email,
+    //         'password' => bcrypt($request->password),
+    //     ]);
+
+    //     return redirect()->route('user.index')->with('success', 'User created successfully.');
+    // }
 
     /**
      * Display the specified resource.
      */
-    public function show(UserModel $user)
+    public function show(User $user)
     {
         return Inertia::render('User/Show', [
             'user' => $user,
@@ -79,9 +109,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserModel $user)
+    public function edit(User $user)
     {
-        return Inertia::render('User/Edit', [
+        return Inertia::render('User/UpdateUser', [
             'user' => $user,
         ]);
     }
@@ -89,7 +119,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserModel $user)
+    public function update(Request $request, User $user)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -99,7 +129,7 @@ class UserController extends Controller
             'kontak' => 'required|string|max:255',
             'role' => 'required|string|max:255',
             'status' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
@@ -121,7 +151,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserModel $user)
+    public function destroy(User $user)
     {
         $user->delete();
 
