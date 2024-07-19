@@ -38,7 +38,18 @@ class DiskusiController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Diskusi/Create');
+              if (auth()->user()->role == "Admin") {
+            return Inertia::render('Diskusi/Create');
+
+        } else if (auth()->user()->role == "Warga") {
+            return Inertia::render('Diskusi/Create_Warga');
+
+        } else if (auth()->user()->role == "RT") {
+            return Inertia::render('Diskusi/Create_RT');
+
+        } else if (auth()->user()->role == "Anggota") {
+            return Inertia::render('Diskusi/Create_Anggota');
+        }
     }
 
     /**
