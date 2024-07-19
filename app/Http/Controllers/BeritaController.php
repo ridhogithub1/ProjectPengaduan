@@ -20,10 +20,29 @@ class BeritaController extends Controller
         $carousel = BeritaModel::orderBy('id', 'desc')->limit(3)->get();
 
         // Merender komponen React Berita.jsx dengan menggunakan Inertia
-        return Inertia::render('Berita/Berita', [
+        
+
+        if (auth()->user()->role == "Admin") {
+            return Inertia::render('Berita/Berita', [
+                'berita' => $berita,
+            ]);
+    } else if (auth()->user()->role == "Warga") {
+        return Inertia::render('Berita/Berita_Warga', [
             'berita' => $berita,
-            'carousel' => $carousel
         ]);
+    } else if (auth()->user()->role == "RT") {
+        return Inertia::render('Berita/Berita_RT', [
+            'berita' => $berita,
+        ]);
+    } else if (auth()->user()->role == "Anggota") {
+        return Inertia::render('Berita/Berita_Anggota', [
+            'berita' => $berita,
+        ]);
+    }
+        //return Inertia::render('Berita/Berita', [
+            //'berita' => $berita,
+            //'carousel' => $carousel
+        //]);
     }
     /**
      * Show the form for creating a new resource.
