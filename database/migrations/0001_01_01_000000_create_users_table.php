@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('alamat', 255)->default(''); // Menambahkan nilai default
-            $table->string('jenis_kelamin', 255)->default(''); // Menambahkan nilai default
+            $table->string('alamat', 255)->nullable(); // Menambahkan nilai default
+            $table->string('jenis_kelamin', 255)->nullable(); // Menambahkan nilai default
             $table->date('tanggal_lahir')->nullable(); // Menambahkan nilai default
-            $table->string('kontak', 255)->default(''); // Menambahkan nilai default
-            $table->string('role', 255)->default('admin'); // Menambahkan nilai default
-            $table->string('status', 255)->default(''); // Menambahkan nilai default
+            $table->string('kontak', 255)->nullable(); // Menambahkan nilai default
+            $table->string('role', 255)->default('Warga'); // Menambahkan nilai default
+            $table->string('status', 255)->default('Aktif'); // Menambahkan nilai default
             $table->rememberToken();
             $table->timestamps();
         });
