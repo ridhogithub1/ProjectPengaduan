@@ -26,35 +26,26 @@ class BeritaController extends Controller
             return Inertia::render('Berita/Berita', [
                 'berita' => $berita,
             ]);
-    } else if (auth()->user()->role == "Warga") {
-        return Inertia::render('Berita/Berita_Warga', [
-            'berita' => $berita,
-        ]);
-    } else if (auth()->user()->role == "RT") {
-        return Inertia::render('Berita/Berita_RT', [
-            'berita' => $berita,
-        ]);
-    } else if (auth()->user()->role == "Anggota") {
-        return Inertia::render('Berita/Berita_Anggota', [
-            'berita' => $berita,
-        ]);
+        } else if (auth()->user()->role == "Warga") {
+            return Inertia::render('Berita/Berita_Warga', [
+                'berita' => $berita,
+            ]);
+        } else if (auth()->user()->role == "RT") {
+            return Inertia::render('Berita/Berita_RT', [
+                'berita' => $berita,
+            ]);
+        } else if (auth()->user()->role == "Anggota") {
+            return Inertia::render('Berita/Berita_Anggota', [
+                'berita' => $berita,
+            ]);
+        }
     }
-        //return Inertia::render('Berita/Berita', [
-            //'berita' => $berita,
-            //'carousel' => $carousel
-        //]);
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return Inertia::render('Berita/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -72,41 +63,42 @@ class BeritaController extends Controller
         $berita->tanggal = date('Y-m-d');
         $berita->save();
 
-        return redirect()->route('berita.index')->with('success', 'Berita created successfully.');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(BeritaModel $beritum)
+    public function show(BeritaModel $berita)
     {
 
         return Inertia::render('Berita/Detail', [
-            'berita' => $beritum
+            'berita' => $berita
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(BeritaModel $berita)
     {
-        //
+        return Inertia::render('Diskusi/EditBerita', [
+            'berita' => $berita,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(BeritaModel $berita, Request $request)
     {
-        //
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'isi' => 'required|string|max:255',
+            'image' => 'nullable|string|max:255',
+            'tanggal' => 'required|date',
+        ]);
+
+        $berita->update($request->all());
+
+        return redirect()->route('berita.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(BeritaModel $berita)
     {
-        //
+        $berita->delete();
+
+        return redirect()->route('berita.index');
     }
 }
