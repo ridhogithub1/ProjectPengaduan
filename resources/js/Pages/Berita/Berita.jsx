@@ -28,15 +28,15 @@ export default function Berita({ berita, carousel }) {
                             Tambah Berita
                         </Link>
                     </div>
-                    <div className="w-full mb-8 overflow-hidden  shadow-xs">
+                    <div className="w-full mb-8 overflow-hidden shadow-xs">
                         <Slider {...settings}>
                             {carousel.map((item, index) => (
                                 <BeritaItem key={index} item={item} />
                             ))}
                         </Slider>
 
-                        <h3 className='font-bold text-3xl mt-10'>Lainnya</h3>
-                        <div className="w-full flex flex-wrap justify-between">
+                        <h3 className='font-bold text-4xl mt-12'>Lainnya</h3>
+                        <div className="w-full flex flex-wrap justify-between ">
                             {berita.map((item, index) => (
                                 <div key={index} className='w-1/2 p-5 relative mb-5'>
                                     <img src={item.image_url} alt={item.judul} className='w-full h-[350px] object-cover' />
