@@ -72,6 +72,16 @@ class BeritaController extends Controller
             'berita' => $berita,
         ]);
     }
+    public function detail($id)
+    {
+        $berita = BeritaModel::find($id);
+
+        // if (!$berita) {
+        //     return redirect()->route('berita.index')->with('error', 'Berita not found');
+        // }
+
+        return Inertia::render('Berita/Detail', ['berita' => $berita]);
+    }
 
     public function edit(BeritaModel $berita)
     {

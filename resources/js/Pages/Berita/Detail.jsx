@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useForm } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout_Admin';
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 export default function Berita({ berita }) {
-
     const { data, setData, post, errors } = useForm({
         judul: '',
         isi: '',
@@ -26,13 +25,13 @@ export default function Berita({ berita }) {
                         </Link>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white shadow-sm">
-                        <div class="p-5">
-                            <img src={berita.image_url} alt="image" class="w-full rounded-lg"/>
-                            <p class="mt-4 text-gray-700">{berita.isi.length > 1000 ? `${berita.isi.substring(0, 1000)}` : berita.isi}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white shadow-sm">
+                        <div className="p-5">
+                            <img src={berita.image_url} alt="image" className="w-full rounded-lg"/>
+                            <p className="mt-4 text-gray-700">{berita.isi}</p>
                         </div>
-                        <div class="p-5">
-                            <p class="mt-4 text-gray-700">{berita.isi.substring(1000)}</p>
+                        <div className="p-5">
+                            <p className="mt-4 text-gray-700">{berita.isi}</p>
                         </div>
                     </div>
                 </div>
