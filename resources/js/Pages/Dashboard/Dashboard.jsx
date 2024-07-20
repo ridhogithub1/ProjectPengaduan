@@ -8,7 +8,7 @@ defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 defaults.plugins.legend.display = false;
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -33,7 +33,7 @@ export default function Dashboard({ auth }) {
                                     Total Warga
                                 </p>
                                 <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    250
+                                    {wargas}
                                 </p>
                             </div>
                         </div>
@@ -48,7 +48,7 @@ export default function Dashboard({ auth }) {
                                     Total Anggota Siskamling
                                 </p>
                                 <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    5
+                                    {anggotas}
                                 </p>
                             </div>
                         </div>
@@ -63,7 +63,7 @@ export default function Dashboard({ auth }) {
                                     Total Pengaduan
                                 </p>
                                 <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    376
+                                    {pengaduans}
                                 </p>
                             </div>
                         </div>
@@ -82,26 +82,12 @@ export default function Dashboard({ auth }) {
                                     data={{
                                         datasets: [
                                             {
-                                                data: [33, 33, 33],
-                                                /**
-                                                 * These colors come from Tailwind CSS palette
-                                                 * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-                                                 */
-                                                backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
+                                                data: [wargas, anggotas, rts],
                                                 cutout: "80%",
-                                                responsive: true,
+                                                backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
                                                 label: 'Dataset 1',
                                             },
                                         ],
-                                        options: {
-                                            /**
-                                             * Default legends are ugly and impossible to style.
-                                             * See examples in charts.html to add your own legends
-                                             *  */
-                                            Legend: {
-                                                display: false
-                                            }
-                                        },
                                         labels: ['Warga', 'Anggota', 'RT'],
                                     }}
                                 />
@@ -123,7 +109,29 @@ export default function Dashboard({ auth }) {
                         </div>
                         <div className="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                                <center>Total Pengaduan </center>
+                                <center>Total Pengaduan</center>
+                            </h4>
+                            {/* <canvas id="pie"></canvas> */}
+                            <div className="dataCard testingCard flex justify-center">
+                                <Bar
+                                    data={{
+                                        datasets: [
+                                            {
+                                                label: 'Shoes',
+                                                backgroundColor: '#0694a2',
+                                                // borderColor: window.chartColors.red,
+                                                borderWidth: 1,
+                                                data: [3, 14, 52, 74, 33, 90, 70, 43 , 43, 12, 52, 90, 32, 56],
+                                            }
+                                        ],
+                                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <div className="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                            <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                                <center>Total Berita </center>
                             </h4>
                             {/* <canvas id="line"></canvas> */}
                             <div className="dataCard testingCard flex justify-center">
@@ -138,47 +146,13 @@ export default function Dashboard({ auth }) {
                                                  */
                                                 backgroundColor: '#0694a2',
                                                 borderColor: '#0694a2',
-                                                data: [43, 48, 40, 54, 67, 73, 70],
+                                                data: [43, 48, 40, 54, 67, 73, 70, 73, 29, 40, 54, 13],
                                                 fill: false,
-                                            },
-                                            {
-                                                label: 'Proses',
-                                                fill: false,
-                                                /**
-                                                 * These colors come from Tailwind CSS palette
-                                                 * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-                                                 */
-                                                backgroundColor: '#7e3af2',
-                                                borderColor: '#7e3af2',
-                                                data: [24, 50, 64, 74, 52, 51, 65],
-                                            },
-                                        ],
-                                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                                    }}
-                                    options={{
-                                        plugins: {
-                                            tooltip:{
-                                                mode:"index",
-                                                intersect: false
-                                            }   
-                                        },
-                                        elements:{
-                                            line:{
-                                                tension: 0.5
                                             }
-                                        }
+                                        ],
+                                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                     }}
                                 />
-                            </div>
-                            <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                                <div className="flex items-center">
-                                    <span className="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                    <span>Selesai</span>
-                                </div>
-                                <div className="flex items-center">
-                                    <span className="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                    <span>Proses</span>
-                                </div>
                             </div>
                         </div>
                     </div>
