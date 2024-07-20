@@ -68,9 +68,8 @@ class BeritaController extends Controller
 
     public function show(BeritaModel $berita)
     {
-
         return Inertia::render('Berita/Detail', [
-            'berita' => $berita
+            'berita' => $berita,
         ]);
     }
 
