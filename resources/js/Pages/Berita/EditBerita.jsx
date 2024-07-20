@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
-export default function EditBerita({ berita }) {
+export default function UpdateBerita({ berita }) {
     const { data, setData, put, errors } = useForm({
         judul: berita.judul || '',
         isi: berita.isi || '',
@@ -11,8 +11,16 @@ export default function EditBerita({ berita }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(`/berita/${berita.id}`); // Adjust the route according to your backend route
+        put(route('berita.update', berita.id)); // Adjust the route according to your backend route
     };
+
+    useEffect(() => {
+        setData({
+            judul: berita.judul || '',
+            isi: berita.isi || '',
+            image: null,
+        });
+    }, [berita]);
 
     return (
         <AuthenticatedLayout>
@@ -62,7 +70,7 @@ export default function EditBerita({ berita }) {
                                 type="submit"
                                 className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
                             >
-                                Submit
+                                Update
                             </button>
                         </div>
                     </form>

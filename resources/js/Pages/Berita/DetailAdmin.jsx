@@ -30,6 +30,12 @@ export default function Berita({ auth, berita }) {
                         >
                             <FiEdit /> <span className='ml-2'>Edit</span>
                         </Link>
+                        <Link
+                                href={route('berita.destroy', berita.id)}
+                                className='flex items-center font-bold text-2xl text-red-600 hover:text-red-800'
+                        >
+                                <FiTrash /> <span className='ml-2'>Delete</span>
+                        </Link>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white shadow-sm">
