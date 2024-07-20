@@ -20,7 +20,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard_warga', fn() => Inertia::render('Dashboard/Dashboard_Warga'))->name('dashboard_warga');
     Route::get('/dashboard_rt', fn() => Inertia::render('Dashboard/Dashboard_RT'))->name('dashboard_rt');
     Route::get('/dashboard_anggota', fn() => Inertia::render('Dashboard/Dashboard_Anggota'))->name('dashboard_anggota');
+    Route::get('/berita/create', [BeritaController::class, 'create'])->name('berita.create');
     Route::get('/berita/{id}', [BeritaController::class, 'detail'])->name('detail');
+    Route::get('/berita/hapus/{id}', [BeritaController::class, 'destroy'])->name('hapus');
     
     Route::resource('pengaduan', PengaduanController::class);
     Route::resource('diskusi', DiskusiController::class);
@@ -32,8 +34,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('task', TaskController::class);
     // Route::resource('user', UserController::class);
 });
-
-
 
 Route::get('/pengaduan/create', [PengaduanController::class, 'create'])->name('pengaduan.create');
 

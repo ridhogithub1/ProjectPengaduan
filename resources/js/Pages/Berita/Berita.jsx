@@ -45,6 +45,9 @@ export default function Berita({ berita }) {
                                             <h1 className='w-2/3 font-bold text-2xl'>{item.judul}</h1>
                                             <Link href={`/berita/${item.id}`} className='underline'>Selengkapnya</Link>
                                         </div>
+                                        <div className="flex justify-between items-center w-[100%]">
+                                            <Link href={`/berita/hapus/${item.id}`} className='underline'>Hapus</Link>
+                                        </div>
                                     </div>
                                 </div>
                             ))}

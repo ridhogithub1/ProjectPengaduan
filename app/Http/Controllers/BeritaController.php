@@ -104,10 +104,20 @@ class BeritaController extends Controller
         return redirect()->route('berita.index');
     }
 
-    public function destroy(BeritaModel $berita)
+    public function destroy($id)
     {
+        // Find the berita by its ID
+        $berita = BeritaModel::find($id);
+
+        // Check if the berita exists
+        if (!$berita) {
+            return redirect()->route('berita.index')->with('error', 'Berita not found');
+        }
+
+        // Delete the berita
         $berita->delete();
 
-        return redirect()->route('berita.index');
+        // Redirect back to the index with a success message
+        return redirect()->route('berita.index')->with('success', 'Berita deleted successfully');
     }
 }

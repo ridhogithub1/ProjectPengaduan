@@ -28,13 +28,13 @@ export default function Berita({ auth, berita }) {
                             href={route('berita.edit', berita.id)}
                             className='flex items-center font-bold text-2xl text-blue-600 hover:text-blue-800'
                         >
-                            <FiEdit /> <span className='ml-2'>Edit</span>
+                            <FiEdit/> <span className='ml-2'>Edit</span>
                         </Link>
                         <Link
                                 href={route('berita.destroy', berita.id)}
                                 className='flex items-center font-bold text-2xl text-red-600 hover:text-red-800'
                         >
-                                <FiTrash /> <span className='ml-2'>Delete</span>
+                            <FiTrash/> <span className='ml-2'>Delete</span>
                         </Link>
                     </div>
 
