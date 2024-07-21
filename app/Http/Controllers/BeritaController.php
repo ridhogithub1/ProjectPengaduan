@@ -27,15 +27,15 @@ class BeritaController extends Controller
                 'berita' => $berita,
             ]);
         } else if (auth()->user()->role == "Warga") {
-            return Inertia::render('Berita/Berita_Warga', [
+            return Inertia::render('Berita/BeritaNonAdmin', [
                 'berita' => $berita,
             ]);
         } else if (auth()->user()->role == "RT") {
-            return Inertia::render('Berita/Berita_RT', [
+            return Inertia::render('Berita/BeritaNonAdmin', [
                 'berita' => $berita,
             ]);
         } else if (auth()->user()->role == "Anggota") {
-            return Inertia::render('Berita/Berita_Anggota', [
+            return Inertia::render('Berita/BeritaNonAdmin', [
                 'berita' => $berita,
             ]);
         }
