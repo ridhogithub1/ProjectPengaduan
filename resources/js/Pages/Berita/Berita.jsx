@@ -40,7 +40,7 @@ export default function Berita({ berita }) {
                             {berita.map((item, index) => (
                                 <div key={index} className='w-1/2 p-5 relative mb-5'>
                                     <img src={item.image_url} alt={item.judul} className='w-full h-[350px] object-cover' />
-                                    <div className='absolute bottom-5 left-5 bg-purple-600 w-[93%] p-5'>
+                                    <div className='absolute bottom-5 left-5 bg-purple-600 w-[704px] p-5'>
                                         <div className="flex justify-between items-center w-[100%]">
                                             <h1 className='w-2/3 font-bold text-2xl'>{item.judul}</h1>
                                             <Link href={`/berita/${item.id}`} className='underline'>Selengkapnya</Link>
