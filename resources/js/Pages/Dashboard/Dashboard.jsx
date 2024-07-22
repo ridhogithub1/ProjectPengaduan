@@ -8,7 +8,7 @@ defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 defaults.plugins.legend.display = false;
 
-export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
+export default function Dashboard({ auth, totalusers, wargas, anggotas, rts, pengaduans, p1s, p2s, p3s, p4s, p5s, p6s, p7s, p8s, p9s, p10s, p11s, p12s, b1s, b2s, b3s, b4s, b5s, b6s, b7s, b8s, b9s, b10s, b11s, b12s }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -30,10 +30,10 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                             </div>
                             <div>
                                 <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                    Total Warga
+                                    Total User
                                 </p>
                                 <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    {wargas}
+                                    {totalusers}
                                 </p>
                             </div>
                         </div>
@@ -85,7 +85,6 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                                                 data: [wargas, anggotas, rts],
                                                 cutout: "80%",
                                                 backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
-                                                label: 'Dataset 1',
                                             },
                                         ],
                                         labels: ['Warga', 'Anggota', 'RT'],
@@ -117,11 +116,10 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                                     data={{
                                         datasets: [
                                             {
-                                                label: 'Shoes',
                                                 backgroundColor: '#0694a2',
                                                 // borderColor: window.chartColors.red,
                                                 borderWidth: 1,
-                                                data: [3, 14, 52, 74, 33, 90, 70, 43 , 43, 12, 52, 90, 32, 56],
+                                                data: [p1s, p2s, p3s, p4s, p5s, p6s, p7s, p8s, p9s, p10s, p11s, p12s],
                                             }
                                         ],
                                         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -139,14 +137,13 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                                     data={{
                                         datasets: [
                                             {
-                                                label: 'Selesai',
                                                 /**
                                                  * These colors come from Tailwind CSS palette
                                                  * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
                                                  */
                                                 backgroundColor: '#0694a2',
                                                 borderColor: '#0694a2',
-                                                data: [43, 48, 40, 54, 67, 73, 70, 73, 29, 40, 54, 13],
+                                                data: [b1s, b2s, b3s, b4s, b5s, b6s, b7s, b8s, b9s, b10s, b11s, b12s],
                                                 fill: false,
                                             }
                                         ],

@@ -8,7 +8,7 @@ defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 defaults.plugins.legend.display = false;
 
-export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
+export default function Dashboard({ auth, totalusers, wargas, anggotas, rts, pengaduans, p1s, p2s, p3s, p4s, p5s, p6s, p7s, p8s, p9s, p10s, p11s, p12s, b1s, b2s, b3s, b4s, b5s, b6s, b7s, b8s, b9s, b10s, b11s, b12s }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -30,10 +30,10 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                             </div>
                             <div>
                                 <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                    Total Warga
+                                    Total User
                                 </p>
                                 <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    {wargas}
+                                    {totalusers}
                                 </p>
                             </div>
                         </div>
@@ -63,7 +63,7 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                                     Total Pengaduan
                                 </p>
                                 <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                {pengaduans}
+                                    {pengaduans}
                                 </p>
                             </div>
                         </div>
@@ -72,41 +72,6 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                         Grafik
                     </h2>
                     <div className="grid gap-6 mb-8 md:grid-cols-2">
-                    <div className="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                            <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                                <center>Total Warga</center>
-                            </h4>
-                            {/* <canvas id="pie"></canvas> */}
-                            <div className="dataCard testingCard flex justify-center">
-                                <Doughnut
-                                    data={{
-                                        datasets: [
-                                            {
-                                                data: [wargas, anggotas, rts],
-                                                cutout: "80%",
-                                                backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
-                                                label: 'Dataset 1',
-                                            },
-                                        ],
-                                        labels: ['Warga', 'Anggota', 'RT'],
-                                    }}
-                                />
-                            </div>
-                            <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                                <div className="flex items-center">
-                                    <span className="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                                    <span>Anggota</span>
-                                </div>
-                                <div className="flex items-center">
-                                    <span className="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                    <span>Warga</span>
-                                </div>
-                                <div className="flex items-center">
-                                    <span className="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                    <span>RT</span>
-                                </div>
-                            </div>
-                        </div>
                         <div className="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                                 <center>Total Pengaduan</center>
@@ -117,14 +82,13 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                                     data={{
                                         datasets: [
                                             {
-                                              label: 'Shoes',
-                                              backgroundColor: '#0694a2',
-                                              // borderColor: window.chartColors.red,
-                                              borderWidth: 1,
-                                              data: [3, 14, 52, 74, 33, 90, 70, 43, 43, 12, 52, 90, 32, 56],
+                                                backgroundColor: '#0694a2',
+                                                // borderColor: window.chartColors.red,
+                                                borderWidth: 1,
+                                                data: [p1s, p2s, p3s, p4s, p5s, p6s, p7s, p8s, p9s, p10s, p11s, p12s],
                                             }
-                                          ],
-                                          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                        ],
+                                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                                     }}
                                 />
                             </div>
@@ -139,14 +103,13 @@ export default function Dashboard({ auth, wargas, anggotas, rts, pengaduans }) {
                                     data={{
                                         datasets: [
                                             {
-                                                label: 'Selesai',
                                                 /**
                                                  * These colors come from Tailwind CSS palette
                                                  * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
                                                  */
                                                 backgroundColor: '#0694a2',
                                                 borderColor: '#0694a2',
-                                                data: [43, 48, 40, 54, 67, 73, 70, 73, 29, 40, 54, 13],
+                                                data: [b1s, b2s, b3s, b4s, b5s, b6s, b7s, b8s, b9s, b10s, b11s, b12s],
                                                 fill: false,
                                             }
                                         ],
